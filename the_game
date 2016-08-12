@@ -1,0 +1,86 @@
+class Grid
+  attr_reader :elements, :empty_space
+  def initialize
+    @empty_space='-'
+    @elements=Array.new(9,@empty_space)
+  end
+  def create
+    @elements.each_slice(3) {|row| puts row.join('|')}
+  end
+end
+Player=Struct.new(:name,:symbol)
+class Tic_tac_toe
+  def initialize
+    @grid=Grid.new
+    @player1=Player.new("Player1","X")
+    @player2=Player.new("Player2","O")
+  end
+  def play
+    @a=Array.new
+    puts "welcome to the the game"
+    @grid.create
+    for i in 1..9 do
+      if i.even?
+        puts "turn#{i}"
+        puts"Player 2,On which position you want to enter your symbol 0 "
+        @pos=gets.to_i
+        create_board(@pos,"O")
+      else
+        puts "turn#{i}"
+        puts"Player 1,On which position you want to enter your symbol x "
+        @pos=gets.to_i
+        create_board(@pos,"X")
+      end
+      check_result
+      end
+    end
+  end
+
+  def create_board(pos,sym)
+    @pos=pos
+    @grid.elements[pos]=sym
+    @grid.create
+  end
+
+
+
+
+  def check_result
+    if(@grid.elements[0]=="X" && @grid.elements[1]=="X" && @grid.elements[2]=="X" )
+      puts "winner is Player1"
+    elsif(@grid.elements[3]=="X" && @grid.elements[4]=="X" && @grid.elements[5]=="X")
+      puts "Winner is Player1"
+    elsif(@grid.elements[6]=="X" && @grid.elements[7]=="X" && @grid.elements[8]=="X")
+      puts "Winner is Player1"
+    elsif(@grid.elements[0]=="X" && @grid.elements[3]=="X" && @grid.elements[6]=="X")
+      puts "Winner is Player1"
+    elsif(@grid.elements[1]=="X" && @grid.elements[4]=="X" && @grid.elements[7]=="X")
+      puts "Winner is Player1"
+    elsif(@grid.elements[2]=="X" && @grid.elements[5]=="X" && @grid.elements[8]=="X")
+      puts "Winner is Player1"
+    elsif(@grid.elements[0]=="X" && @grid.elements[4]=="X" && @grid.elements[8]=="X")
+      puts "Winner is Player1"
+    elsif(@grid.elements[2]=="X" && @grid.elements[4]=="X" && @grid.elements[6]=="X")
+      puts "Winner is Player1"
+    elsif(@grid.elements[0]=="O" && @grid.elements[1]=="O" && @grid.elements[2]=="O" )
+      puts "winner is Player2"
+    elsif(@grid.elements[3]=="O" && @grid.elements[4]=="O" && @grid.elements[5]=="O")
+      puts "Winner is Player2"
+    elsif(@grid.elements[6]=="O" && @grid.elements[7]=="O" && @grid.elements[8]=="O")
+      puts "Winner is Player2"
+    elsif(@grid.elements[0]=="O" && @grid.elements[3]=="O" && @grid.elements[6]=="O")
+      puts "Winner is Player2"
+    elsif(@grid.elements[1]=="O" && @grid.elements[4]=="O" && @grid.elements[7]=="O")
+      puts "Winner is Player2"
+    elsif(@grid.elements[2]=="O" && @grid.elements[5]=="O" && @grid.elements[8]=="O")
+      puts "Winner is Player2"
+    elsif(@grid.elements[0]=="O" && @grid.elements[4]=="O" && @grid.elements[8]=="O")
+      puts "Winner is Player2"
+    elsif(@grid.elements[2]=="O" && @grid.elements[4]=="O" && @grid.elements[6]=="O")
+      puts "Winner is Player2"
+    else
+      return false
+    end
+  end
+game=Tic_tac_toe.new
+game.play
